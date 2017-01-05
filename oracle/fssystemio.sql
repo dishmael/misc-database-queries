@@ -1,0 +1,28 @@
+-- I/O operations in UNIX and Linux systems typically go through the file system cache. 
+-- Although this doesn't represent a problem in itself, this extra processing does require 
+-- resources. Bypassing the file system cache reduces CPU requirements, and frees up the 
+-- file system cache for other non-database file operations. Operations against raw devices 
+-- automatically bypass the file system cache.
+--
+-- When a synchronous I/O request is submitted to the operating system, the writing process 
+-- blocks until the write is complete before continuing processing. With asynchronous I/O, 
+-- processing continues while the I/O request is submitted and processed. This allows asynchronous 
+-- I/O to bypass some of the performance bottlenecks associated with I/O operations.
+--
+-- Oracle can take advantage of direct I/O and asynchronous I/O on supported platforms using 
+-- the FILESYSTEMIO_OPTIONS parameter, whose possible values are listed below.
+--    ASYNCH - Enabled asynchronous I/O where possible.
+--    DIRECTIO- Enabled direct I/O where possible.
+--    SETALL- Enabled both direct I/O and asynchronous I/O where possible.
+--    NONE - Disabled both direct I/O and asynchronous I/O.
+-- 
+SHOW PARAMETER FILESYSTEMIO_OPTIONS
+/
+--
+-- ALTER SYSTEM SET FILESYSTEMIO_OPTIONS=SETALL SCOPE=SPFILE SID='*';
+--
+-- SHUTDOWN IMMEDIATE
+--
+-- STARTUP
+--
+-- SHOW PARAMETER FILESYSTEMIO_OPTIONS;

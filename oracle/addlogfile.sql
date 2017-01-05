@@ -1,0 +1,8 @@
+--
+--
+--alter database add logfile group 45 ('/Oracle2/oradata/fda/redo45.log') size 200M;
+--SELECT
+--	MAX(log.group#)
+--FROM
+--	v$log log
+--/
