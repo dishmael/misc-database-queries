@@ -1,0 +1,20 @@
+DROP FUNCTION IF EXISTS normalize_date;
+DELIMITER $$
+CREATE FUNCTION normalize_date
+(
+    StartDate DATETIME,
+    Seconds INTEGER
+)
+RETURNS DATETIME
+
+BEGIN
+    DECLARE NewDate DATETIME;
+
+    SELECT FROM_UNIXTIME(Seconds * FLOOR( UNIX_TIMESTAMP(StartDate)/Seconds )) INTO NewDate; 
+
+    RETURN NewDate;
+
+END;
+$$
+DELIMITER ;
+
